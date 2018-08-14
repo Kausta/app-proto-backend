@@ -25,11 +25,15 @@
   "scripts": {
     "test": "yarn run eslint && yarn run mocha",
     "lint": "standard --verbose src/**/*.js test/**/*.js | snazzy",
-    "lint-fix": "standard --verbose src/**/*.js test/**/*.js --fix | snazzy",
+    "lint-fix": "standard --verbose --fix src/**/*.js test/**/*.js | snazzy",
+    "pretty": "prettier-standard src/**/*.js test/**/*.js | snazzy",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
+    "@feathersjs/authentication": "^2.1.7",
+    "@feathersjs/authentication-jwt": "^2.0.1",
+    "@feathersjs/authentication-local": "^1.2.1",
     "@feathersjs/configuration": "^2.0.0",
     "@feathersjs/errors": "^3.3.0",
     "@feathersjs/express": "^1.2.3",
@@ -37,7 +41,9 @@
     "@feathersjs/socketio": "^3.2.2",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
+    "feathers-nedb": "^3.1.0",
     "helmet": "^3.13.0",
+    "nedb": "^1.8.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.0.0"
   },
@@ -46,6 +52,7 @@
     "husky": "^1.0.0-rc.13",
     "lint-staged": "^7.2.0",
     "mocha": "^5.2.0",
+    "prettier-standard": "^8.0.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "snazzy": "^7.1.1",
@@ -53,7 +60,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint-fix",
+      "prettier-standard",
       "git add"
     ]
   },

@@ -1,19 +1,22 @@
-// Application hooks that run for every service
-const log = require('./hooks/log')
+const {authenticate} = require('@feathersjs/authentication').hooks
+
+const processMessage = require('../../hooks/process-message');
+
+const populateUser = require('../../hooks/populate-user');
 
 module.exports = {
   before: {
-    all: [log()],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [],
+    create: [processMessage()],
     update: [],
     patch: [],
     remove: []
   },
 
   after: {
-    all: [log()],
+    all: [populateUser()],
     find: [],
     get: [],
     create: [],
@@ -23,7 +26,7 @@ module.exports = {
   },
 
   error: {
-    all: [log()],
+    all: [],
     find: [],
     get: [],
     create: [],
